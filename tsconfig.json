@@ -1,0 +1,15 @@
+// configurer pour éviter de marquer les dir et files dans le npm
+
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "target": "ES2015",
+        "noEmitOnError": false,
+        // mode stricte pour éviter les erreurs
+        "strict": true
+    },
+    "files": [
+        "src/app.ts"
+    ]
+}
+
