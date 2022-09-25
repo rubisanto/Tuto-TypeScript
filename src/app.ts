@@ -1,5 +1,5 @@
 // Le "!" permet de dire que compteur ne peut pas être nul ou undefined
-const compteur = document.querySelector('#compteur')!;
+const compteur = document.querySelector<HTMLButtonElement>('#compteur')!;
 let i = 0;
 
 const increment = (e: Event) => {
@@ -49,3 +49,53 @@ function isDate(a: any): a is Date {
 // utiliser l'add event listener que si le compteur existe
 
 compteur?.addEventListener('click', increment);
+
+// créer un type 
+type User = {firstname: string, lastname: string}
+type DateString = string;
+type Id = string | number;
+
+// les génériques 
+// même type en entrée et en sortie
+
+function identity<ArgType>(arg: ArgType): ArgType {
+    return arg;
+}
+
+const aa = identity<number>(3);
+
+// avec un tableau 
+
+function first<Type>(arg: Type[]): Type {
+    return arg[0];
+}
+
+const bb = first(["aze","cze","bze"]);
+
+const cc: Array<string | number> = ["az", "cze", 3];
+
+type Identity<ArgType> = (arg: ArgType) => ArgType;
+
+// avec contraintes 
+function consoleSize<Type extends {length: number}>(arg: Type): Type{
+    console.log(arg.length);
+    return arg;
+}
+
+const aab = consoleSize(["3", 2]);
+
+// type qui dépend  un autre avec les clefs  
+
+type P = keyof User
+
+// héritage d un autre type 
+type Username = User['firstname']
+
+// extraire un type avec de l'existant 
+const user = {
+    firstname: "John",
+    lastname: "Doe",
+    age: 32
+}
+
+type User = typeof user;
